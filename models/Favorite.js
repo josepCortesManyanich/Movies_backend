@@ -3,17 +3,18 @@ const {Schema , model} = require('mongoose')
 
 const FavoritaSchema = new Schema({
     usuario: {
-        type: Schema.Type.ObjectId, ref: 'Usuario'
+        type: Schema.Types.ObjectId, ref: 'User'
       },
-    peliculas:{
-        apiId: {type: String},
-        apiTitle:{type:String}
+    apiId: {
+        type: String
+    },       
+    apiTitle:{
+        type:String
     },
-    series:{
-        apiId:{type:String},
-        apiTitle:{type: String},
+    apiImage:{
+        type:String
     },
-      
+    
     });
 
 module.exports = model('Favoritas', FavoritaSchema)
