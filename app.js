@@ -7,9 +7,15 @@ const app = express()
 
 dbConect()
 
+const indexRouter = require('./routes/index')
+const userRouter = require ('./routes/user-routes')
+
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({extended:true}));
+
+app.use('/', indexRouter)
+app.use('/api/user', userRouter)
 
 
 
@@ -17,6 +23,6 @@ app.use(express.urlencoded({extended:false}));
 
 
 
-app.listen(() =>{
+app.listen(7000,() =>{
     console.log('Conectado a la base de datos')
 })

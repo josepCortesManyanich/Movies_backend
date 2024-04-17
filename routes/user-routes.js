@@ -1,13 +1,15 @@
 const router = require('express').Router();
 const User = require('../models/User');
-const ErrorResponse = require('../utils/error');
+const ErrorResponse = require('../error')
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
-const { isAuthenticated } = require('../middlewares/jwt');
+const saltRounds = 10
+const {isAuthenticated} = require('../middlewares/jwt')
 
 
 router.post('/signup', async (req, res, next) => {
     const { email, password, username, imageUrl } = req.body;
+    console.log(req.body)
     
     if (email === "" || password === "" || username === "") {
       return next(new ErrorResponse('Obligatorio todos los campos para registrarse', 400))
@@ -66,7 +68,7 @@ router.post('/signup', async (req, res, next) => {
          // Uso el middleware jwt para crear un token de autentificacion
           const authToken = jwt.sign(
             payload,
-            process.env.TOKEN_SECRET,
+            'Josepcortes123456',
             { algorithm: 'HS256' }
           );
           res.status(200).json({ authToken: authToken })
@@ -122,3 +124,5 @@ router.post('/signup', async (req, res, next) => {
       next(error)
     }
   })
+
+  module.exports= router
