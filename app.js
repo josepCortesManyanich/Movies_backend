@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require ('express')
 const cors = require ('cors')
 const {dbConect} = require ('./db/index')
@@ -8,7 +9,7 @@ dbConect()
 
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:false}));
 
 
 
