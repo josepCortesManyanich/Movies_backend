@@ -168,8 +168,8 @@ router.post('/:serieId/add', isAuthenticated, async (req, res, next)=>{
       if(!user){
         return next(new ErrorResponse('Usuario no encontrado', 404));
       }
-      if (!user.favoritasSerie.includes(serieId)) {
-        user.favoritasSerie.push({_id:serieId, apiImage: apiImage, apiTitle: apiTitle});
+      if (!user.favoritas.includes(serieId)) {
+        user.favoritas.push({_id:serieId, apiImage: apiImage, apiTitle: apiTitle});
         await user.save();
         res.status(200).json({ message: 'Película agregada a favoritos correctamente' });
     } else {
@@ -187,7 +187,7 @@ router.post('/:serieId/add', isAuthenticated, async (req, res, next)=>{
 
 
 /*RUTA PARA AÑADIR VISTAS */
-router.post('/:movieId/vistas', isAuthenticated, async (req, res, next)=>{
+router.post('/:serieId/vistas', isAuthenticated, async (req, res, next)=>{
   const userId = req.payload._id;
   const { serieId } = req.params;
   const {apiImage, apiTitle} = req.body
@@ -196,13 +196,37 @@ router.post('/:movieId/vistas', isAuthenticated, async (req, res, next)=>{
       if(!user){
         return next(new ErrorResponse('Usuario no encontrado', 404));
       }
-      if (!user.vistasSerie.includes(movieId)) {
-        user.vistasSerie.push({_id:serieId, apiImage: apiImage, apiTitle: apiTitle});
+      if (!user.vistas.includes(serieId)) {
+        user.vistas.push({_id:serieId, apiImage: apiImage, apiTitle: apiTitle});
         await user.save();
         res.status(200).json({ message: 'Serie agregada a vistas correctamente' });
     } else {
       
         return next(new ErrorResponse('Esta serie ya la has visto', 400))
+    }
+} catch (error) {
+  
+    console.error(error);
+    return next(new ErrorResponse('Error al agregar la película', 500));
+}
+});
+
+router.post('/:movieId/vistas', isAuthenticated, async (req, res, next)=>{
+  const userId = req.payload._id;
+  const { movieId } = req.params;
+  const {apiImage, apiTitle} = req.body
+  try {
+      const user = await User.findById(userId);
+      if(!user){
+        return next(new ErrorResponse('Usuario no encontrado', 404));
+      }
+      if (!user.vistas.includes(movieId)) {
+        user.vistas.push({_id:movieId, apiImage: apiImage, apiTitle: apiTitle});
+        await user.save();
+        res.status(200).json({ message: 'pelicula agregada a vistas correctamente' });
+    } else {
+      
+        return next(new ErrorResponse('Esta pelicula ya la has visto', 400))
     }
 } catch (error) {
   

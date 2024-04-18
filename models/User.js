@@ -28,6 +28,7 @@ const UserSchema = new Schema({
         apiTitle: String,
         apiImage: String
       }],
+  
       
     },
     {
