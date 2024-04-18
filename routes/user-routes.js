@@ -85,7 +85,7 @@ router.post('/signup', async (req, res, next) => {
   
 
   //    GET /api/v1/usuario/me
-  router.get('/perfil', isAuthenticated, (req, res, next) => {
+  router.get('/me', isAuthenticated, (req, res, next) => {
     res.status(200).json(req.payload);
   })
   

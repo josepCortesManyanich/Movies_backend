@@ -15,34 +15,38 @@ router.get('/', async(req,res,next) =>{
     }
 })
 
+
+
+
+ 
 router.post('/', isAuthenticated, async (req, res, next) => {
     const { apiId, apiTitle, apiImage } = req.body;
     const userId = req.payload._id;
     
     try {
-        let listaFavoritas = await Favoritas.findOne({ userID: userId });
+        let newFavorita = await Favoritas.findOne({ userID: userId });
 
-        if (!listaFavoritas) {
-            listaFavoritas = new Favoritas({ userID: userId, favoritas: [] });
+        // Si no existe una lista de favoritos para este usuario, creamos una nueva
+        if (!newFavorita) {
+            newFavorita = new Favoritas({
+                userID: userId,
+                apiId,
+                apiTitle,
+                 apiImage
+            });
+            await newFavorita.save(); // Guardamos la nueva lista de favoritos en la base de datos
+            return res.status(201).json({ message: 'Película agregada a favoritos exitosamente' });
         }
-        if (listaFavoritas && listaFavoritas.favoritas) {
-           
-            const peliculaExistente = listaFavoritas.favoritas.find(pelicula => pelicula.apiId === apiId);
-            if (!peliculaExistente) {
-                listaFavoritas.favoritas.push({ apiId, apiTitle, apiImage });
-                await listaFavoritas.save();
-                return res.status(201).json({ message: 'Película agregada a favoritos exitosamente' });
-            } 
-        } else {
-            return res.status(500).json({ error: 'Ocurrió un error al obtener la lista de favoritos' });
-        }
+
+        // Si ya existe una lista de favoritos para este usuario, agregamos la película a la lista existente
+        newFavorita.favoritas.push({ apiId, apiTitle, apiImage });
+        await newFavorita.save(); // Guardamos la lista de favoritos actualizada en la base de datos
+        return res.status(201).json({ message: 'Película agregada a favoritos exitosamente' });
     } catch (error) {
         console.error(error);
+        return res.status(500).json({ error: 'Ocurrió un error al agregar la película a favoritos' });
     }
 });
-
-
-
 
 
 
