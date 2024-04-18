@@ -18,11 +18,11 @@ const UserSchema = new Schema({
       imageUrl:{
         type: String
       },
-      favoritas:{
-        type: [Schema.Types.ObjectId],
-        ref: 'Movies'
-      }
-
+      favoritas: [{
+        movieId: { type: Schema.Types.ObjectId, ref: 'Movies' },
+        apiTitle: String,
+        apiImage: String
+      }]
     },
     {
       timestamps: true

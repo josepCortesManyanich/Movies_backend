@@ -131,6 +131,7 @@ router.post('/signup', async (req, res, next) => {
   router.post('/:movieId/add', isAuthenticated, async (req, res, next)=>{
     const userId = req.payload._id;
     const { movieId } = req.params;
+    const {apiImage, apiTitle} = req.body
     try {
       if (!mongoose.isValidObjectId(movieId)) {
         return next(new ErrorResponse('ID de película no válido', 400));
@@ -141,7 +142,7 @@ router.post('/signup', async (req, res, next) => {
           return next(new ErrorResponse('Usuario no encontrado', 404));
         }
         if (!user.favoritas.includes(movieId)) {
-          user.favoritas.push(movieId);
+          user.favoritas.push({_id:movieId, apiImage: apiImage, apiTitle: apiTitle});
           // Guarda los cambios en la base de datos
           await user.save();
           res.status(200).json({ message: 'Película agregada a favoritos correctamente' });

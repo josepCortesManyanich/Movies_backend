@@ -5,7 +5,6 @@ const {dbConect} = require ('./db/index')
 
 const indexRouter = require('./routes/index')
 const userRouter = require ('./routes/user-routes')
-const favoriteRouter = require('./routes/favorite-routes')
 const movieRouter = require('./routes/Movies-router')
 
 
@@ -20,7 +19,6 @@ app.use(express.urlencoded({extended:true}));
 
 app.use('/', indexRouter)
 app.use('/api/user', userRouter)
-app.use('/api/user/favoritas', favoriteRouter)
 app.use('/api/movies', movieRouter)
 
 
