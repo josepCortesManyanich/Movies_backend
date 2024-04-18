@@ -1,49 +1,387 @@
 require('dotenv').config();
 const axios = require('axios');
 const mongoose = require('mongoose');
-const Movie = require('../models/Movie');
+const Movie = require('../models/Movies');
+const express = require('express')
 
 mongoose.connect('mongodb://localhost:27017/Movies')
   .then(() => {
     console.log('Connected to MongoDB');
-    data();
   })
   .catch(error => {
     console.error('Error connecting to MongoDB:', error);
-  });
+  })
 
-const data = async () => {
-  try {
-    const response = await axios.get('https://api.themoviedb.org/3/movie/now_playing', {
-      params: {
-        language: 'en-US',
-        page: 1
-      },
-      headers: {
-        Accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNDMyNTc0YTQzZTMyZTAwNGFmNWVhMmJjZDU5MjdlZiIsInN1YiI6IjY2MTFhYjgzMTEwOGE4MDE2NDhjN2VlMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sVMODQOs97ekq4hGuXhLckNoM4_OM9Fj9yqomyzwcZ4'
+  const seedData = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'Action'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
       }
-    });
-
-    const response1 = await axios.get('https://api.themoviedb.org/3/movie/top_rated', {
-      params: {
-        language: 'en-US',
-        page: 1
-      },
-      headers: {
-        Accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNDMyNTc0YTQzZTMyZTAwNGFmNWVhMmJjZDU5MjdlZiIsInN1YiI6IjY2MTFhYjgzMTEwOGE4MDE2NDhjN2VlMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sVMODQOs97ekq4hGuXhLckNoM4_OM9Fj9yqomyzwcZ4'
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
       }
-    });
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    } 
+  };
 
-   
-    await Movie.insertMany(response.data.results);
-    await Movie.insertMany(response1.data.results);
+  const seedData1 = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'Drama'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
+      }
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
+      }
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    } 
+  };
+  const seedData2 = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'movie'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
+      }
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
+      }
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const seedData3 = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'sky'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
+      }
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
+      }
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    } 
+  };
+  const seedData4 = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'comedy'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
+      }
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
+      }
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    } 
+  };
+  const seedData5 = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'war'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
+      }
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
+      }
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const seedData6 = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'harry'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
+      }
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
+      }
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    } 
+  };
+  const seedData7 = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'marvel'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
+      }
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
+      }
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    } 
+  };
+  const seedData8 = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'lord'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
+      }
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
+      }
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    } 
+  };
 
-    console.log('CORRECTO');
-  } catch (error) {
-    console.error('Error seeding data:', error);
-  } finally {
-    mongoose.connection.close();
-  }
-};
+  const seedData9 = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'king'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
+      }
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
+      }
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    } 
+  };
+  const seedData10 = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'queen'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
+      }
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
+      }
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const seedData11 = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'bad'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
+      }
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
+      }
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    } 
+  };
+  const seedData12 = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'good'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
+      }
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
+      }
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    } 
+ 
+  };
+
+
+  seedData()
+  seedData1()
+  seedData2()
+  seedData3()
+  seedData4()
+  seedData5()
+  seedData6()
+  seedData7()
+  seedData8()
+  seedData9()
+  seedData10()
+  seedData11()
+  seedData12()
+
+  
+
+

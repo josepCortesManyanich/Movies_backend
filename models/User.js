@@ -18,6 +18,10 @@ const UserSchema = new Schema({
       imageUrl:{
         type: String
       },
+      favoritas:{
+        type: [Schema.Types.ObjectId],
+        ref: 'Movies'
+      }
 
     },
     {

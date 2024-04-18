@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const saltRounds = 10
 const {isAuthenticated} = require('../middlewares/jwt')
+const mongoose = require('mongoose')
 
 
 router.post('/signup', async (req, res, next) => {
@@ -126,4 +127,32 @@ router.post('/signup', async (req, res, next) => {
     }
   })
 
+
+  router.post('/:movieId/add', isAuthenticated, async (req, res, next)=>{
+    const userId = req.payload._id;
+    const { movieId } = req.params;
+    try {
+      if (!mongoose.isValidObjectId(movieId)) {
+        return next(new ErrorResponse('ID de película no válido', 400));
+    }
+
+        const user = await User.findById(userId);
+        if(!user){
+          return next(new ErrorResponse('Usuario no encontrado', 404));
+        }
+        if (!user.favoritas.includes(movieId)) {
+          user.favoritas.push(movieId);
+          // Guarda los cambios en la base de datos
+          await user.save();
+          res.status(200).json({ message: 'Película agregada a favoritos correctamente' });
+      } else {
+          // Si la película ya está en la lista, devuelve un error
+          return next(new ErrorResponse('Esta película ya está en tu lista de favoritos', 400))
+      }
+  } catch (error) {
+      // Manejo genérico de errores
+      console.error(error);
+      return next(new ErrorResponse('Error al agregar la película a favoritos', 500));
+  }
+});
   module.exports= router
