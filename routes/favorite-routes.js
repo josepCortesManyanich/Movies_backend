@@ -15,34 +15,31 @@ router.get('/', async(req,res,next) =>{
     }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', isAuthenticated, async (req, res, next) => {
     const { apiId, apiTitle, apiImage } = req.body;
- 
-    // Verificar si los campos requeridos están presentes
-    if (!apiId || !apiTitle || !apiImage) {
-        return res.status(400).json({ error: 'Faltan campos requeridos en la solicitud' });
-    }
-
+    const userId = req.payload._id;
+    
     try {
-        // Crear una nueva instancia de Favoritas con los datos de la película seleccionada
-        const nuevaFavorita = new Favoritas({
-            apiId,
-            apiTitle,
-            apiImage
-        });
+        let listaFavoritas = await Favoritas.findOne({ userID: userId });
 
-        // Guardar la nueva película en la colección de favoritos
-        await nuevaFavorita.save();
-
-        // Responder con un mensaje de éxito
-        res.status(201).json({ message: 'Película agregada a favoritos exitosamente' });
+        if (!listaFavoritas) {
+            listaFavoritas = new Favoritas({ userID: userId, favoritas: [] });
+        }
+        if (listaFavoritas && listaFavoritas.favoritas) {
+           
+            const peliculaExistente = listaFavoritas.favoritas.find(pelicula => pelicula.apiId === apiId);
+            if (!peliculaExistente) {
+                listaFavoritas.favoritas.push({ apiId, apiTitle, apiImage });
+                await listaFavoritas.save();
+                return res.status(201).json({ message: 'Película agregada a favoritos exitosamente' });
+            } 
+        } else {
+            return res.status(500).json({ error: 'Ocurrió un error al obtener la lista de favoritos' });
+        }
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Ocurrió un error al agregar la película a favoritos' });
     }
 });
-
-
 
 
 

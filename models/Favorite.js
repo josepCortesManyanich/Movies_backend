@@ -2,8 +2,9 @@ const mongoose = require ('mongoose')
 const {Schema , model} = require('mongoose')
 
 const FavoritaSchema = new Schema({
-    usuario: {
-        type: Schema.Types.ObjectId, ref: 'User'
+    userId: {
+        type: Schema.Types.ObjectId, 
+        ref: 'User'
       },
     apiId: {
         type: String

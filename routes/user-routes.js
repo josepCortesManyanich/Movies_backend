@@ -71,6 +71,7 @@ router.post('/signup', async (req, res, next) => {
             'Josepcortes123456',
             { algorithm: 'HS256' }
           );
+          console.log('Token de autenticación:', authToken)
           res.status(200).json({ authToken: authToken })
         } else {
         
