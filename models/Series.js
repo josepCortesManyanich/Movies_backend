@@ -8,6 +8,19 @@ const SerieSchema = new Schema({
     apiImage:{
         type:String
     },
+    apiYear:{
+        type:String
+    },
+    apiPlot:{
+        type:String,
+        
+    },
+    apiGenre:{
+        type:String,
+       
+    }
+ 
+
     
     });
 

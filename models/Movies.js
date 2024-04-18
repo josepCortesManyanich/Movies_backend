@@ -8,7 +8,11 @@ const MovieSchema = new Schema({
     apiImage:{
         type:String
     },
-    
+    apiYear:{
+        type:String
+    }   
     });
 
 module.exports = model('Movies', MovieSchema)
+
+   

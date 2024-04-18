@@ -148,15 +148,12 @@ router.post('/signup', async (req, res, next) => {
         }
         if (!user.favoritas.includes(movieId)) {
           user.favoritas.push({_id:movieId, apiImage: apiImage, apiTitle: apiTitle});
-          // Guarda los cambios en la base de datos
           await user.save();
           res.status(200).json({ message: 'Película agregada a favoritos correctamente' });
-      } else {
-          // Si la película ya está en la lista, devuelve un error
+      } else {r
           return next(new ErrorResponse('Esta película ya está en tu lista de favoritos', 400))
       }
   } catch (error) {
-      // Manejo genérico de errores
       console.error(error);
       return next(new ErrorResponse('Error al agregar la película a favoritos', 500));
   }
@@ -173,15 +170,12 @@ router.post('/:serieId/add', isAuthenticated, async (req, res, next)=>{
       }
       if (!user.favoritasSerie.includes(serieId)) {
         user.favoritasSerie.push({_id:serieId, apiImage: apiImage, apiTitle: apiTitle});
-        // Guarda los cambios en la base de datos
         await user.save();
         res.status(200).json({ message: 'Película agregada a favoritos correctamente' });
     } else {
-        // Si la película ya está en la lista, devuelve un error
         return next(new ErrorResponse('Esta película ya está en tu lista de favoritos', 400))
     }
 } catch (error) {
-    // Manejo genérico de errores
     console.error(error);
     return next(new ErrorResponse('Error al agregar la película a favoritos', 500));
 }
@@ -204,7 +198,6 @@ router.post('/:movieId/vistas', isAuthenticated, async (req, res, next)=>{
       }
       if (!user.vistasSerie.includes(movieId)) {
         user.vistasSerie.push({_id:serieId, apiImage: apiImage, apiTitle: apiTitle});
-        // Guarda los cambios en la base de datos
         await user.save();
         res.status(200).json({ message: 'Serie agregada a vistas correctamente' });
     } else {

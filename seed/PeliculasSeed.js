@@ -28,7 +28,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
@@ -58,7 +60,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
@@ -87,7 +91,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
@@ -116,7 +122,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
@@ -145,7 +153,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
@@ -174,7 +184,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
@@ -203,7 +215,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
@@ -232,7 +246,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
@@ -261,7 +277,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
@@ -291,7 +309,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
@@ -320,7 +340,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
@@ -349,7 +371,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
@@ -378,7 +402,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
@@ -408,7 +434,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
           apiTitle: movie.Title,
           apiImage: movie.Poster,
           apiYear: movie.Year,
-          apiPlot: movie.Plot
+          apiPlot: movie.Plot,
+          apiGenre: movie.Genre,
+          apiActors: movie.Actors
         }));
         await Movie.insertMany(moviesData);
         
