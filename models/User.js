@@ -22,7 +22,13 @@ const UserSchema = new Schema({
         movieId: { type: Schema.Types.ObjectId, ref: 'Movies' },
         apiTitle: String,
         apiImage: String
-      }]
+      }],
+      vistas: [{
+        movieId: { type: Schema.Types.ObjectId, ref: 'Movies' },
+        apiTitle: String,
+        apiImage: String
+      }],
+      
     },
     {
       timestamps: true

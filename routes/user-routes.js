@@ -45,7 +45,7 @@ router.post('/signup', async (req, res, next) => {
   });
   
   // @desc    LOG IN user
-  // @route   POST /api/v1/auth/login
+  // @route   POST /api/user/login
   // @access  Public
   router.post('/login', async (req, res, next) => { 
     const { email, password } = req.body;
@@ -86,8 +86,17 @@ router.post('/signup', async (req, res, next) => {
   
 
   //    GET /api/v1/usuario/me
-  router.get('/me', isAuthenticated, (req, res, next) => {
-    res.status(200).json(req.payload);
+  router.get('/me', isAuthenticated, async (req, res, next) => {
+    const userId = req.payload._id;
+    try {
+      const user = await User.findById(userId)
+      if(!user){
+          console.log('No hay user')
+      } else res.status(200).json({data: user})
+  } catch (error) {
+      console.error(error)
+  }
+    
   })
   
   //@route   POST /api/v1/usuario/edit
@@ -127,16 +136,12 @@ router.post('/signup', async (req, res, next) => {
     }
   })
 
-
+/*RUTA PARA PONER FAVORITAS*/
   router.post('/:movieId/add', isAuthenticated, async (req, res, next)=>{
     const userId = req.payload._id;
     const { movieId } = req.params;
     const {apiImage, apiTitle} = req.body
     try {
-      if (!mongoose.isValidObjectId(movieId)) {
-        return next(new ErrorResponse('ID de película no válido', 400));
-    }
-
         const user = await User.findById(userId);
         if(!user){
           return next(new ErrorResponse('Usuario no encontrado', 404));
@@ -156,4 +161,65 @@ router.post('/signup', async (req, res, next) => {
       return next(new ErrorResponse('Error al agregar la película a favoritos', 500));
   }
 });
+
+router.post('/:serieId/add', isAuthenticated, async (req, res, next)=>{
+  const userId = req.payload._id;
+  const { serieId } = req.params;
+  const {apiImage, apiTitle} = req.body
+  try {
+      const user = await User.findById(userId);
+      if(!user){
+        return next(new ErrorResponse('Usuario no encontrado', 404));
+      }
+      if (!user.favoritasSerie.includes(serieId)) {
+        user.favoritasSerie.push({_id:serieId, apiImage: apiImage, apiTitle: apiTitle});
+        // Guarda los cambios en la base de datos
+        await user.save();
+        res.status(200).json({ message: 'Película agregada a favoritos correctamente' });
+    } else {
+        // Si la película ya está en la lista, devuelve un error
+        return next(new ErrorResponse('Esta película ya está en tu lista de favoritos', 400))
+    }
+} catch (error) {
+    // Manejo genérico de errores
+    console.error(error);
+    return next(new ErrorResponse('Error al agregar la película a favoritos', 500));
+}
+});
+
+
+
+
+
+
+/*RUTA PARA AÑADIR VISTAS */
+router.post('/:movieId/vistas', isAuthenticated, async (req, res, next)=>{
+  const userId = req.payload._id;
+  const { serieId } = req.params;
+  const {apiImage, apiTitle} = req.body
+  try {
+      const user = await User.findById(userId);
+      if(!user){
+        return next(new ErrorResponse('Usuario no encontrado', 404));
+      }
+      if (!user.vistasSerie.includes(movieId)) {
+        user.vistasSerie.push({_id:serieId, apiImage: apiImage, apiTitle: apiTitle});
+        // Guarda los cambios en la base de datos
+        await user.save();
+        res.status(200).json({ message: 'Serie agregada a vistas correctamente' });
+    } else {
+      
+        return next(new ErrorResponse('Esta serie ya la has visto', 400))
+    }
+} catch (error) {
+  
+    console.error(error);
+    return next(new ErrorResponse('Error al agregar la película', 500));
+}
+});
+
+
+
+
+
   module.exports= router

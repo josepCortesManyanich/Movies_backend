@@ -26,7 +26,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
       if (response.data && response.data.Search) {
         const moviesData = response.data.Search.map(movie => ({
           apiTitle: movie.Title,
-          apiImage: movie.Poster
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
         }));
         await Movie.insertMany(moviesData);
         
@@ -54,7 +56,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
       if (response.data && response.data.Search) {
         const moviesData = response.data.Search.map(movie => ({
           apiTitle: movie.Title,
-          apiImage: movie.Poster
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
         }));
         await Movie.insertMany(moviesData);
         
@@ -81,7 +85,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
       if (response.data && response.data.Search) {
         const moviesData = response.data.Search.map(movie => ({
           apiTitle: movie.Title,
-          apiImage: movie.Poster
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
         }));
         await Movie.insertMany(moviesData);
         
@@ -108,7 +114,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
       if (response.data && response.data.Search) {
         const moviesData = response.data.Search.map(movie => ({
           apiTitle: movie.Title,
-          apiImage: movie.Poster
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
         }));
         await Movie.insertMany(moviesData);
         
@@ -135,7 +143,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
       if (response.data && response.data.Search) {
         const moviesData = response.data.Search.map(movie => ({
           apiTitle: movie.Title,
-          apiImage: movie.Poster
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
         }));
         await Movie.insertMany(moviesData);
         
@@ -162,7 +172,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
       if (response.data && response.data.Search) {
         const moviesData = response.data.Search.map(movie => ({
           apiTitle: movie.Title,
-          apiImage: movie.Poster
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
         }));
         await Movie.insertMany(moviesData);
         
@@ -189,7 +201,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
       if (response.data && response.data.Search) {
         const moviesData = response.data.Search.map(movie => ({
           apiTitle: movie.Title,
-          apiImage: movie.Poster
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
         }));
         await Movie.insertMany(moviesData);
         
@@ -216,7 +230,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
       if (response.data && response.data.Search) {
         const moviesData = response.data.Search.map(movie => ({
           apiTitle: movie.Title,
-          apiImage: movie.Poster
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
         }));
         await Movie.insertMany(moviesData);
         
@@ -243,7 +259,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
       if (response.data && response.data.Search) {
         const moviesData = response.data.Search.map(movie => ({
           apiTitle: movie.Title,
-          apiImage: movie.Poster
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
         }));
         await Movie.insertMany(moviesData);
         
@@ -271,7 +289,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
       if (response.data && response.data.Search) {
         const moviesData = response.data.Search.map(movie => ({
           apiTitle: movie.Title,
-          apiImage: movie.Poster
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
         }));
         await Movie.insertMany(moviesData);
         
@@ -298,7 +318,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
       if (response.data && response.data.Search) {
         const moviesData = response.data.Search.map(movie => ({
           apiTitle: movie.Title,
-          apiImage: movie.Poster
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
         }));
         await Movie.insertMany(moviesData);
         
@@ -325,7 +347,9 @@ mongoose.connect('mongodb://localhost:27017/Movies')
       if (response.data && response.data.Search) {
         const moviesData = response.data.Search.map(movie => ({
           apiTitle: movie.Title,
-          apiImage: movie.Poster
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
         }));
         await Movie.insertMany(moviesData);
         
@@ -352,7 +376,39 @@ mongoose.connect('mongodb://localhost:27017/Movies')
       if (response.data && response.data.Search) {
         const moviesData = response.data.Search.map(movie => ({
           apiTitle: movie.Title,
-          apiImage: movie.Poster
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
+        }));
+        await Movie.insertMany(moviesData);
+        
+      } else {
+        console.error(error);
+      }
+  
+      console.log('CORRECTO');
+    } catch (error) {
+      console.error(error);
+    } 
+ 
+  };
+  const seedData13 = async () => {
+    try {
+      const apiKey = 'ffdce154'; 
+      const searchTerm = 'one piece'; 
+      const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}`;
+      const options = {
+        method: 'GET',
+        url: url
+      }
+      
+      const response = await axios(options);
+      if (response.data && response.data.Search) {
+        const moviesData = response.data.Search.map(movie => ({
+          apiTitle: movie.Title,
+          apiImage: movie.Poster,
+          apiYear: movie.Year,
+          apiPlot: movie.Plot
         }));
         await Movie.insertMany(moviesData);
         
@@ -381,6 +437,7 @@ mongoose.connect('mongodb://localhost:27017/Movies')
   seedData10()
   seedData11()
   seedData12()
+  seedData13()
 
   
 

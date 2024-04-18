@@ -20,7 +20,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "seed": "node seed/PeliculasSeed.js"
+    "seed": "node seed/PeliculasSeed.js",
+    "seed-series": "node seed/SeriesSeed.js"
   },
   "author": "Josep",
   "license": "ISC",
