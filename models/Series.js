@@ -10,18 +10,8 @@ const SerieSchema = new Schema({
     },
     apiYear:{
         type:String
-    },
-    apiPlot:{
-        type:String,
-        
-    },
-    apiGenre:{
-        type:String,
-       
     }
  
-
-    
     });
 
 module.exports = model('Series', SerieSchema)
